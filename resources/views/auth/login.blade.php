@@ -2,9 +2,12 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
             </a>
         </x-slot>
+
+        <h1 style="display:flex; justify-content:center;">Panpacific University Helpdesk</h1>
+        <h1 style="display:flex; justify-content:center;">Login</h1>
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -39,18 +42,25 @@
                     <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
             </div>
-
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-left mt-4 mb-1">
+                <x-button class="ml-5">
+                        {{ __('Log in') }}
+                </x-button>
+            </div>
+            <div class="flex items-center justify-left mt-4">
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
-
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
             </div>
+            <div class="flex items-center justify-left mt-4">
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="underline text-sm text-gray-600 hover:text-gray-900">Register</a>
+                @endif
+            </div>
+          
+
         </form>
     </x-auth-card>
 </x-guest-layout>
