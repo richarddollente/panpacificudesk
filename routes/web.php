@@ -17,14 +17,12 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->name('dashboard');
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::resource(name: 'tickets', controller:\App\Http\Controllers\TicketController::class);
-    Route::resource(name: 'users', controller:\App\Http\Controllers\UserController::class);
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('tickets', \App\Http\Controllers\TicketController::class);
+
+    Route::resource('users', \App\Http\Controllers\UsersController::class);
 });
-
-
-require __DIR__.'/auth.php';
