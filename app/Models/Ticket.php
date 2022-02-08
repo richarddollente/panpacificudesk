@@ -17,4 +17,10 @@ class Ticket extends Model
         'description',
         'assigned_tech'
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
 }
