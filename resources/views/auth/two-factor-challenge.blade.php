@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
         </x-slot>
 
         <div x-data="{ recovery: false }">
@@ -15,7 +15,7 @@
 
             <x-jet-validation-errors class="mb-4" />
 
-            <form method="POST" action="{{ route('two-factor.login') }}">
+            <form method="POST" action="/two-factor-challenge">
                 @csrf
 
                 <div class="mt-4" x-show="! recovery">
@@ -48,7 +48,7 @@
                     </button>
 
                     <x-jet-button class="ml-4">
-                        {{ __('Log in') }}
+                        {{ __('Login') }}
                     </x-jet-button>
                 </div>
             </form>
