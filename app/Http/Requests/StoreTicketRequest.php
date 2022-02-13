@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Suppport\Facades\Gate;
+use Illuminate\Support\Facades\Gate;
 
 class StoreTicketRequest extends FormRequest
 {
@@ -19,16 +19,10 @@ class StoreTicketRequest extends FormRequest
             'subject' => [
                 'required', 'string',
             ],
-            'status' => [
-                'string',
-            ],
-            'priority' => [
-                'string',
-            ],
             'description' => [
                 'required', 'string',
             ],
-            'assgined_tech' => [
+            'file' => [
                 'string',
             ],
 
