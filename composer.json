@@ -16,7 +16,9 @@
         "laravel/jetstream": "^1.6",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "*"
+        "livewire/livewire": "*",
+        "spatie/laravel-medialibrary": "9.0.0",
+        "symfony/mime": "5.4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
