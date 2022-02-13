@@ -26,3 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('users', \App\Http\Controllers\UsersController::class);
 });
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
