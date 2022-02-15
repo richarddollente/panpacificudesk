@@ -24,9 +24,9 @@ class Ticket extends Model implements HasMedia
 
     ];
 
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class)->select(['id', 'name']);
     }
 
     public function registerMediaConversions(Media $media = null): void
