@@ -1,1 +1,1 @@
-<img class="mb-3" src="school-logo.jpg" alt="..." style="height: 48px"/>
+<img class="mb-3" src="{{ asset('school-logo.png')  }}" alt="Panpacific University" style="height: 40px"/>
