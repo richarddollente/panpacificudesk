@@ -17,15 +17,18 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
+    return view('tickets.index');
+})->name('tickets');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('tickets', \App\Http\Controllers\TicketController::class);
-
     Route::resource('users', \App\Http\Controllers\UsersController::class);
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
