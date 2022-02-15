@@ -16,7 +16,15 @@ class TicketController extends Controller
     public function index()
     {
         $tickets = Ticket::all();
-        return view('tickets.index', compact('tickets'));
+        if(Gate::allows('ticket_access')){
+            $tickets = Ticket::where('user_id', Auth::user()->id)->get();
+            return view('tickets.index', compact('tickets'));
+        }
+        elseif(Gate::allows('staff-ticket_access')){
+            $tickets = Ticket::where('admin_id', Auth::user()->id)->get();
+            return view('tickets.staff', compact('tickets'));
+        }
+        return view('tickets.admin', compact('tickets'));
     }
 
     public function create()
@@ -27,7 +35,7 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         $ticket = Ticket::create([
-            'user_id' => Auth::user()->name,
+            'user_id' => Auth::user()->id,
             'subject' => request('subject'),
             'description' => request('description'),
             'admin_id' => 1,
