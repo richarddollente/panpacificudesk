@@ -8,7 +8,7 @@
     <div>
         <div class="max-w-4xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="post" action="{{ route('tickets.store') }}">
+                <form method="post" action="{{ route('tickets.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
@@ -30,7 +30,7 @@
 
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="file" class="block font-medium text-sm text-gray-700">Supporting file</label>
-                            <input type="file" name="file" placeholder="Choose file" id="file">
+                            <input type="file" name="ticket_file" placeholder="Choose file" id="ticket_file" class="form-control">
                             @error('file')
                             <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror

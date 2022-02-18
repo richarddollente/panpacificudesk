@@ -26,6 +26,9 @@
                                         Subject
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Submit By
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Category
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -48,23 +51,21 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                             {{ $ticket->id }}
                                         </td>
-
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                             {{ $ticket->subject }}
                                         </td>
-
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $ticket->category }}
+                                            {{ (DB::table('users')->where('id', ($ticket->user_id))->value('name')) }}
                                         </td>
-
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $ticket->status }}
+                                            {{ (DB::table('categories')->where('id', ($ticket->category_id))->value('title')) }}
                                         </td>
-
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $ticket->priority }}
+                                            {{ (DB::table('statuses')->where('id', ($ticket->status_id))->value('title')) }}
                                         </td>
-
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            {{ (DB::table('priorities')->where('id', ($ticket->priority_id))->value('title')) }}
+                                        </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                             {{ $ticket->updated_at }}
                                         </td>
