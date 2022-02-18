@@ -28,6 +28,12 @@ class UserTableSeeder extends Seeder
                 'email' => 'staff.ancheta@panpacificudesk.com',
                 'password' => bcrypt('password')
             ],
+            [
+                'id'    => 4,
+                'name'  => "Jhovbert Bogtong",
+                'email' => 'admin.bogtong@panpacificudesk.com',
+                'password' => bcrypt('password')
+            ]
         ];
 
         User::insert($user);

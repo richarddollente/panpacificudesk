@@ -14,8 +14,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserTableSeeder::class,
-            TicketTableSeeder::class,
             PermissionsTableSeeder::class,
+            PriorityTableSeeder::class,
+            CategoryTableSeeder::class,
+            StatusTableSeeder::class,
+            TicketTableSeeder::class,
             RolesTableSeeder::class,
             PermissionRoleTableSeeder::class,
             RoleUserTableSeeder::class,
