@@ -18,25 +18,37 @@ class Ticket extends Model implements HasMedia
         'description',
         'user_id',
         'admin_id',
+        'status_id',
+        'category_id',
+        'priority_id',
+        'ticket_file',
     ];
 
     protected $guarded = [
 
     ];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class)->select(['id', 'name']);
+        return $this->hasOne(User::class, 'id', 'name');
+    }
+    public function admins()
+    {
+        return $this->belongsTo(User::class, 'admin_id');
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function status()
+    {
+        return $this->belongsTo(Status::class)->select(['id', 'title']);
+    }
+    public function priority()
+    {
+        return $this->belongsTo(Priority::class)->select(['id', 'title']);
     }
 
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')->width(50)->height(50);
-    }
 
-    public function getAttachmentsAttribute()
-    {
-        return $this->getMedia('file');
-    }
 
 }
