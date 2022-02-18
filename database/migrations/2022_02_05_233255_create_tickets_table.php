@@ -17,11 +17,11 @@ class CreateTicketsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('subject');
-            $table->string('category_id')->nullable();
-            $table->string('status_id')->nullable();
-            $table->string('priority_id')->nullable();
+            $table->string('category_id')->references('id')->on('category')->cascadeOnDelete();
+            $table->string('status_id')->references('id')->on('status')->cascadeOnDelete();
+            $table->string('priority_id')->references('id')->on('priority')->cascadeOnDelete();
             $table->string('description');
-            $table->string('file')->nullable();
+            $table->string('ticket_file')->nullable();
             $table->foreignId('admin_id')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
