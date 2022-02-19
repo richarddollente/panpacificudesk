@@ -93,7 +93,7 @@
                                         Updated At
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $ticket->updated_at }}
+                                        {{ $ticket->updated_at }}, {{ $ticket->updated_at->diffForHumans() }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -105,6 +105,52 @@
                                     </td>
                                 </tr>
                             </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200 w-full">
+                                <tr class="border-b">
+                                    <th scope="col" class="px-6 py-3 bg-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Comment Section
+                                    </th>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
+
+                                    </td>
+                                </tr>
+                                @foreach ($ticket->comments as $comment)
+                                <tr class="border-b">
+                                    <th width="15" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        <img class="h-8 w-8 rounded-full object-cover" src="http://127.0.0.1:8000/storage/default-account.png" alt="" />
+                                        {{ (DB::table('users')->where('id', ($comment->user_id))->value('name')) }}
+                                        <br>
+                                        {{ (DB::table('users')->where('id', ($comment->user_id))->value('email')) }}
+                                        <br>
+                                        {{ $comment->created_at->diffForHumans() }}
+                                    </th>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
+                                        {{ $comment->body }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </table>
+                            <form method="post" action="/tickets/{id}/comments">
+                                @csrf
+                                    <div class="px-4 py-5 bg-white sm:p-6">
+                                        <label for="body" class="block font-medium text-sm text-gray-700">Post Your Comment:</label>
+                                        <textarea type="text" name="body" id="body" class="form-input rounded-md shadow-sm mt-1 block w-full"/></textarea>
+                                    </div>
+                                    <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                        <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                            Post Comment
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
