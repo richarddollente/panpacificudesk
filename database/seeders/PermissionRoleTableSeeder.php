@@ -17,5 +17,6 @@ class PermissionRoleTableSeeder extends Seeder
         Permission::findOrFail(1)->roles()->sync(3);
         Permission::findOrFail(4)->roles()->sync(3);
         Permission::findOrFail(2)->roles()->sync(2);
+        Permission::findOrFail(1)->roles()->sync(1);
     }
 }
