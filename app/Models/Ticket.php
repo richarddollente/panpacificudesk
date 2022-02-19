@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Ticket extends Model implements HasMedia
 {
@@ -30,25 +29,27 @@ class Ticket extends Model implements HasMedia
 
     public function users()
     {
-        return $this->hasOne(User::class, 'id', 'name');
+        return $this->hasOne(User::class);
     }
     public function admins()
     {
-        return $this->belongsTo(User::class, 'admin_id');
+        return $this->belongsToMany(User::class);
     }
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
     public function status()
     {
-        return $this->belongsTo(Status::class)->select(['id', 'title']);
+        return $this->belongsToMany(Status::class);
     }
     public function priority()
     {
-        return $this->belongsTo(Priority::class)->select(['id', 'title']);
+        return $this->belongsToMany(Priority::class);
     }
 
-
-
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
