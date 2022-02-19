@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -72,6 +71,11 @@ class User extends Authenticatable
     public function tickets()
     {
         return $this->belongsToMany(Ticket::class);
+    }
+
+    public function comments()
+    {
+        return $this->belongsToMany(Comment::class);
     }
 
     public function roles()
