@@ -642,6 +642,7 @@ class ComposerStaticInitf0e87b5b9a3da98f04e5d6ce30ddbc40
         'App\\Http\\Requests\\UpdateTicketRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateTicketRequest.php',
         'App\\Http\\Requests\\UpdateUserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateUserRequest.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
+        'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/Models/Comment.php',
         'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',
         'App\\Models\\Priority' => __DIR__ . '/../..' . '/app/Models/Priority.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',

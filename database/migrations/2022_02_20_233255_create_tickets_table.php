@@ -17,9 +17,9 @@ class CreateTicketsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('subject');
-            $table->string('category_id')->references('id')->on('category')->cascadeOnDelete();
-            $table->string('status_id')->references('id')->on('status')->cascadeOnDelete();
-            $table->string('priority_id')->references('id')->on('priority')->cascadeOnDelete();
+            $table->foreignId('category_id')->references('id')->on('categories')->cascadeOnDelete();
+            $table->foreignId('status_id')->references('id')->on('statuses')->cascadeOnDelete();
+            $table->foreignId('priority_id')->references('id')->on('priorities')->cascadeOnDelete();
             $table->string('description');
             $table->string('ticket_file')->nullable();
             $table->foreignId('admin_id')->references('id')->on('users')->cascadeOnDelete();

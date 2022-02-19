@@ -41,6 +41,7 @@ return array(
     'App\\Http\\Requests\\UpdateTicketRequest' => $baseDir . '/app/Http/Requests/UpdateTicketRequest.php',
     'App\\Http\\Requests\\UpdateUserRequest' => $baseDir . '/app/Http/Requests/UpdateUserRequest.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
+    'App\\Models\\Comment' => $baseDir . '/app/Models/Comment.php',
     'App\\Models\\Permission' => $baseDir . '/app/Models/Permission.php',
     'App\\Models\\Priority' => $baseDir . '/app/Models/Priority.php',
     'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',
