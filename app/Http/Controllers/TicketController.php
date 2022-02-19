@@ -8,22 +8,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Ticket;
-use App\Models\User;
-use App\Models\Category;
-use App\Models\Status;
-use App\Models\Priority;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Gate;use Symfony\Component\HttpFoundation\Response;
 
 class TicketController extends Controller
 {
     public function index()
     {
 
-        $tickets = Ticket::with('users')->get();
+        $tickets = Ticket::all();
         if(Gate::allows('ticket_access')){
             $tickets = Ticket::where('user_id', Auth::user()->id)->get();
+
             return view('tickets.index', compact('tickets'));
         }
         elseif(Gate::allows('staff-ticket_access')){
@@ -71,12 +67,19 @@ class TicketController extends Controller
 
     public function show(Ticket $ticket)
     {
-        $username = DB::table('users')->where('id', ($ticket->user_id))->value('name');
-        $category = DB::table('categories')->where('id', ($ticket->category_id))->value('title');
-        $status = DB::table('statuses')->where('id', ($ticket->status_id))->value('title');
-        $priority = DB::table('priorities')->where('id', ($ticket->priority_id))->value('title');
-        $admin = DB::table('users')->where('id', ($ticket->admin_id))->value('name');
-        return view('tickets.show', compact('ticket', 'username', 'category', 'status', 'priority', 'admin'));
+        if(Gate::allows('admin-ticket_access') || Gate::allows('staff-ticket_access') || (Auth::user()->id === $ticket->user_id))
+        {
+            $username = DB::table('users')->where('id', ($ticket->user_id))->value('name');
+            $category = DB::table('categories')->where('id', ($ticket->category_id))->value('title');
+            $status = DB::table('statuses')->where('id', ($ticket->status_id))->value('title');
+            $priority = DB::table('priorities')->where('id', ($ticket->priority_id))->value('title');
+            $admin = DB::table('users')->where('id', ($ticket->admin_id))->value('name');
+            return view('tickets.show', compact('ticket', 'username', 'category', 'status', 'priority', 'admin'));
+        }
+        else
+        {
+            return view('tickets.403');
+        }
     }
 
     public function edit(Ticket $ticket)
