@@ -52,4 +52,8 @@ class Ticket extends Model implements HasMedia
     {
         return $this->hasMany(Comment::class);
     }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 }
