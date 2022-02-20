@@ -83,9 +83,22 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function classes()
+    {
+        return $this->belongsToMany(Classes::class);
+    }
+
     public function setPasswordAttribute($password)
     {
         return $this->attributes['password'] = Hash::make($password);
+    }
+    public function isAdmin()
+    {
+        return $this->roles()->where('role_id', 1)->first();
+    }
+    public function getRoleNamesAttribute()
+    {
+        return $this->roles->pluck('title');
     }
 
 }
