@@ -21,6 +21,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
     return view('tickets.index');
 })->name('tickets');
 
+Route::post('/tickets/{ticket}/comments', 'App\Http\Controllers\CommentsController@store');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('tickets', \App\Http\Controllers\TicketController::class);
     Route::resource('users', \App\Http\Controllers\UsersController::class);
@@ -33,3 +35,5 @@ Route::get('/dashboard', function () {
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
 });
+
+
