@@ -68,7 +68,7 @@
                                             {{ (DB::table('users')->where('id', ($ticket->admin_id))->value('name')) }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $ticket->updated_at }}
+                                            {{ $ticket->updated_at->diffForHumans() }}
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
