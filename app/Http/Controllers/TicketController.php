@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Models\Category;
+use App\Models\Priority;
+use App\Models\Status;
+use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Database\Eloquent\Collection;
 
 class TicketController extends Controller
 {
@@ -40,16 +47,17 @@ class TicketController extends Controller
         $hasFile = $request->hasFile('ticket_file');
         if($hasFile){
             $file = $request->file('ticket_file');
-            dump($filePath = Storage::disk('public')->putFile('ticket_files', $file));
-            dump(Ticket::create([
+            $filePath = Storage::disk('public')->putFile('ticket_files', $file);
+            Ticket::create([
                 'user_id' => Auth::user()->id,
                 'subject' => request('subject'),
                 'description' => request('description'),
                 'admin_id' => 1,
                 'category_id' => 1,
+                'status_id' => 1,
+                'priority_id' => 3,
                 'ticket_file' => $filePath,
-            ]));
-
+            ]);
         }
         else
         {
@@ -59,9 +67,10 @@ class TicketController extends Controller
                 'description' => request('description'),
                 'admin_id' => 1,
                 'category_id' => 1,
+                'status_id' => 1,
+                'priority_id' => 3,
             ]);
         }
-
         return redirect()->route(route:'tickets.index');
     }
 
@@ -84,12 +93,31 @@ class TicketController extends Controller
 
     public function edit(Ticket $ticket)
     {
-        return view('ticket.edit');
+        if(Gate::allows('admin-ticket_access') || Gate::allows('staff-ticket_access'))
+            {
+                $categories = Category::pluck('title', 'id');
+                $statuses = Status::pluck('title', 'id');
+                $priorities = Priority::pluck('title', 'id');
+                $admins = DB::table('users')->where('class_id','1')->pluck('name', 'id');
+                return view('tickets.edit', compact('ticket', 'categories', 'statuses', 'priorities', 'admins'));
+            }
+        else
+        {
+            return view('tickets.403');
+        }
     }
 
-    public function update(UpdateTicketRequestRequest $request, Ticket $ticket)
+    public function update(Request $request, Ticket $ticket)
     {
-        $ticket->update($request->validated());
+        DB::table('tickets')->where('id', $ticket->id)->update([
+            'subject' => $request['subject'],
+            'description' => $request['description'],
+            'admin_id' => $request['admin_id'],
+            'category_id' => $request['category_id'],
+            'status_id' => $request['status_id'],
+            'priority_id' => $request['priority_id'],
+            'updated_at' => date("Y-m-d H:i:s"),
+        ]);
         return redirect()->route(route:'tickets.index');
     }
 
