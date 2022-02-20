@@ -11,6 +11,8 @@ class Comment extends Model
 
     protected $fillable = [
         'body',
+        'user_id',
+        'ticket_id',
     ];
 
     public function tickets()
