@@ -11,12 +11,16 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
+        <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         @livewireStyles
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        <!-- Graph -->
+
 
     </head>
     <body class="font-sans antialiased">
@@ -39,5 +43,13 @@
         @stack('modals')
 
         @livewireScripts
+        <!-- Load Bootstrap JS bundle-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script type="module" src="js/material.js"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.0-beta.10/chart.min.js" crossorigin="anonymous"></script>
+        <script src="js/chart-defaults.js"></script>
+        <script src="js/chart-pie.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     </body>
 </html>
