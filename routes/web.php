@@ -32,6 +32,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/notifications', function () {
+    return view('notifications');
+})->middleware(['auth'])->name('notifications');
+
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
 });
