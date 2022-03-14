@@ -15,7 +15,7 @@ var myStatusPieChart = new Chart(ctx, {
     data: {
         labels: ['Open', 'In Progress', 'Closed'],
         datasets: [{
-            data: [1, 3, 2],
+            data: [opencount, inprogresscount, closecount],
             backgroundColor: [RedColor, YellowColor, GreenColor],
         }],
     },
@@ -27,7 +27,7 @@ var myPriorityPieChart = new Chart(ctx, {
     data: {
         labels: ['Critical', 'High', 'Medium', 'Low'],
         datasets: [{
-            data: [1, 3, 2, 5],
+            data: [criticalcount, highcount, mediumcount, lowcount],
             backgroundColor: [RedColor, OrangeColor, YellowColor, GreenColor],
         }],
     },
@@ -39,7 +39,7 @@ var myCategoryPieChart = new Chart(ctx, {
     data: {
         labels: ['Uncategorized', 'PU Official Website', 'AIMS', 'Google Classroom', 'PU Email', 'Computer Laboratory', 'School Wi-Fi'],
         datasets: [{
-            data: [1, 3, 2, 5, 2, 4, 1],
+            data: [uccount, puowcount, aimscount, gccount, puecount, clcount, swcount],
             backgroundColor: [OrangeColor, BlueColor, IndigoColor, RedColor, CyanColor, GreenColor, DarkColor],
         }],
     },

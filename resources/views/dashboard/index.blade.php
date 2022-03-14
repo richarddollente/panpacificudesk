@@ -12,6 +12,9 @@
                 <div class="col flex-shrink-0 mb-5 mb-md-0">
                     <h1 class="display-4 mb-0">Statistics</h1>
                     <div class="text-muted">Ticket and User overview</div>
+                    <a onclick="window.print()">
+                        <button class="btn bg-green-500 hover:bg-green-700 btn-lg text-white" type="button">Print</button>
+                    </a>
                 </div>
             </div>
 
@@ -23,7 +26,7 @@
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <div class="me-2">
                                     <div class="card-text">Total Users</div>
-                                    <div class="display-5 text-white">1</div>
+                                    <div class="display-5 text-white">{{ $usercount }}</div>
 
                                 </div>
                             </div>
@@ -38,7 +41,7 @@
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <div class="me-2">
                                     <div class="card-text">Total Tickets</div>
-                                    <div class="display-5 text-white">1</div>
+                                    <div class="display-5 text-white">{{ $ticketcount }}</div>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +54,7 @@
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <div class="me-2">
                                     <div class="card-text">Open Tickets</div>
-                                    <div class="display-5 text-white">1</div>
+                                    <div class="display-5 text-white">{{ $opencount }}</div>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +67,7 @@
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <div class="me-2">
                                     <div class="card-text">In Progress Tickets</div>
-                                    <div class="display-5 text-white">1</div>
+                                    <div class="display-5 text-white">{{ $inprogresscount }}</div>
                                 </div>
                             </div>
                         </div>
@@ -130,4 +133,24 @@
             </div>
         </div>
     </main>
+    <script type="text/javascript">
+
+        var usercount = {!! $usercount !!};
+        var ticketcount = {!! $ticketcount !!};
+        var opencount = {!! $opencount !!};
+        var inprogresscount = {!! $inprogresscount !!};
+        var closecount = {!! $closecount !!};
+        var criticalcount = {!! $criticalcount !!};
+        var highcount = {!! $highcount !!};
+        var mediumcount = {!! $mediumcount !!};
+        var lowcount = {!! $lowcount !!};
+        var uccount = {!! $uccount !!};
+        var puowcount = {!! $puowcount !!};
+        var aimscount = {!! $aimscount !!};
+        var gccount = {!! $gccount !!};
+        var puecount = {!! $puecount !!};
+        var clcount = {!! $clcount !!};
+        var swcount = {!! $swcount !!};
+
+    </script>
 </x-app-layout>
