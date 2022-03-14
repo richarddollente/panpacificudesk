@@ -26,11 +26,9 @@ Route::post('/tickets/{ticket}/comments', 'App\Http\Controllers\CommentsControll
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('tickets', \App\Http\Controllers\TicketController::class);
     Route::resource('users', \App\Http\Controllers\UsersController::class);
+    Route::resource('dashboard', \App\Http\Controllers\DashboardController::class);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 Route::get('/notifications', function () {
     return view('notifications');
