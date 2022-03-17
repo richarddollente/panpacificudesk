@@ -128,15 +128,16 @@ class TicketController extends Controller
     }
     public function search(Request $request)
     {
-
+        $query = $request->input('query');
         $tickets = Ticket::all();
+        $tickets = Ticket::where('id', 'like', "% $query% ")->orWhere('subject', 'like', "% $query% ")->orWhere('description', 'like', "% $query% ")->get();
         if(Gate::allows('ticket_access')){
-            $tickets = Ticket::where('user_id', Auth::user()->id)->get();
+            $tickets = Ticket::where('user_id', Auth::user()->id)->where('id', 'like', "% $query% ")->orWhere('subject', 'like', "% $query% ")->orWhere('description', 'like', "% $query% ")->get();
 
             return view('tickets.search', compact('tickets'));
         }
         elseif(Gate::allows('staff-ticket_access')){
-            $tickets = Ticket::where('admin_id', Auth::user()->id)->get();
+            $tickets = Ticket::where('admin_id', Auth::user()->id)->where('id', 'like', "% $query% ")->orWhere('subject', 'like', "% $query% ")->orWhere('description', 'like', "% $query% ")->get();
             return view('tickets.search', compact('tickets'));
         }
         return view('tickets.search', compact('tickets'));

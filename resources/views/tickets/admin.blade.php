@@ -14,10 +14,15 @@
     <div>
         <div class="max-w-6xl mx-auto py-5 sm:px-6 lg:px-7">
             <div class="block mb-5">
-                <a href="{{ route('tickets.search') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                    Create Ticket
-                </a>
+                <div class="input-group">
+                    <div class="form-outline" action="{{ route('tickets.search') }}" method="GET">
+                        <input type="text" name="query" id="query" class="form-input px-4 shadow-sm mt-1" value="" />
+                        <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                            Search
+                        </button>
+                    </div>
 
+                  </div>
             </div>
 
             <div class="flex flex-col">
