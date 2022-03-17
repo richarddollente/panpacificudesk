@@ -17,8 +17,7 @@ class CompletePasswordReset
      */
     public function __invoke(StatefulGuard $guard, $user)
     {
-        $user->setRememberToken(Str::random(60));
-
+        
         $user->save();
 
         event(new PasswordReset($user));
