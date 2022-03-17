@@ -8,21 +8,24 @@
         <a href="{{ route('tickets.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
             Create Ticket
         </a>
-        
+
     </x-slot>
 
     <div>
         <div class="max-w-6xl mx-auto py-5 sm:px-6 lg:px-7">
-            <div class="block mb-5">
-                <div class="input-group">
-                    <div class="form-outline" action="{{ route('tickets.search') }}" method="GET">
-                        <input type="text" name="query" id="query" class="form-input px-4 shadow-sm mt-1" value="" />
-                        <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                            Search
-                        </button>
-                    </div>
-
-                  </div>
+            <div class="mx-auto pull-right">
+                <div class="mb-5">
+                    <form action="{{ route('tickets.index') }}" method="GET" role="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control mr-2" name="query" placeholder="Search Tickets" id="query">
+                            <span class="input-group-btn mr-5 mt-1">
+                                <button class="btn bg-green-500 text-white" type="submit" title="Search Tickets">
+                                    Search
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <div class="flex flex-col">

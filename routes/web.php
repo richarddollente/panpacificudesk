@@ -29,13 +29,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('dashboard', \App\Http\Controllers\DashboardController::class);
 });
 
-
 Route::get('/notifications', function () {
     return view('notifications');
 })->middleware(['auth'])->name('notifications');
 
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
+});
+
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
 });
 
 

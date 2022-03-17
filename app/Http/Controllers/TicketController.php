@@ -20,20 +20,40 @@ use Illuminate\Database\Eloquent\Collection;
 
 class TicketController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->input('query');
+        if ($query===NULL){
+            $tickets = Ticket::all();
+            if(Gate::allows('ticket_access')){
+                $tickets = Ticket::where('user_id', Auth::user()->id)->get();
+                return view('tickets.index', compact('tickets'));
+            }
+            elseif(Gate::allows('staff-ticket_access')){
+                $tickets = Ticket::where('admin_id', Auth::user()->id)->get();
+                return view('tickets.staff', compact('tickets'));
+            }
+            return view('tickets.admin', compact('tickets'));
 
-        $tickets = Ticket::all();
-        if(Gate::allows('ticket_access')){
-            $tickets = Ticket::where('user_id', Auth::user()->id)->get();
-
-            return view('tickets.index', compact('tickets'));
         }
-        elseif(Gate::allows('staff-ticket_access')){
-            $tickets = Ticket::where('admin_id', Auth::user()->id)->get();
-            return view('tickets.staff', compact('tickets'));
+        else{
+            $tickets = Ticket::where('id', 'LIKE','%' . $query . '%' )->orWhere('subject', 'LIKE','%' . $query . '%' )->get();
+            if(Gate::allows('ticket_access')){
+                if(ctype_digit($query)){
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('id', 'LIKE','%' . $query . '%' )->get();
+                    return view('tickets.index', compact('tickets'));
+                }
+                else{
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('subject', 'LIKE','%' . $query . '%' )->get();
+                    return view('tickets.index', compact('tickets'));
+                }
+            }
+            elseif(Gate::allows('staff-ticket_access')){
+                $tickets = Ticket::where('admin_id', Auth::user()->id)->andWhere('id', 'LIKE','%' . $query . '%' )->orWhere('subject', 'LIKE','%' . $query . '%' )->get();
+                return view('tickets.staff', compact('tickets'));
+            }
+            return view('tickets.admin', compact('tickets'));
         }
-        return view('tickets.admin', compact('tickets'));
 
     }
 
@@ -126,21 +146,5 @@ class TicketController extends Controller
         $ticket->delete();
         return redirect()->route(route:'tickets.index');
     }
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-        $tickets = Ticket::all();
-        $tickets = Ticket::where('id', 'like', "% $query% ")->orWhere('subject', 'like', "% $query% ")->orWhere('description', 'like', "% $query% ")->get();
-        if(Gate::allows('ticket_access')){
-            $tickets = Ticket::where('user_id', Auth::user()->id)->where('id', 'like', "% $query% ")->orWhere('subject', 'like', "% $query% ")->orWhere('description', 'like', "% $query% ")->get();
 
-            return view('tickets.search', compact('tickets'));
-        }
-        elseif(Gate::allows('staff-ticket_access')){
-            $tickets = Ticket::where('admin_id', Auth::user()->id)->where('id', 'like', "% $query% ")->orWhere('subject', 'like', "% $query% ")->orWhere('description', 'like', "% $query% ")->get();
-            return view('tickets.search', compact('tickets'));
-        }
-        return view('tickets.search', compact('tickets'));
-
-    }
 }
