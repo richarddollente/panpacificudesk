@@ -1,17 +1,25 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Admin Tickets List') }}
-        </h2>
+        <div class="block mb-5">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Admin Tickets List') }}
+            </h2>
+        </div>
+        <a href="{{ route('tickets.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Create Ticket
+        </a>
+        
     </x-slot>
 
     <div>
         <div class="max-w-6xl mx-auto py-5 sm:px-6 lg:px-7">
             <div class="block mb-5">
-                <a href="{{ route('tickets.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                <a href="{{ route('tickets.search') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                     Create Ticket
                 </a>
+
             </div>
+
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">

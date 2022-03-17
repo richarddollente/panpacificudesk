@@ -126,4 +126,20 @@ class TicketController extends Controller
         $ticket->delete();
         return redirect()->route(route:'tickets.index');
     }
+    public function search(Request $request)
+    {
+
+        $tickets = Ticket::all();
+        if(Gate::allows('ticket_access')){
+            $tickets = Ticket::where('user_id', Auth::user()->id)->get();
+
+            return view('tickets.search', compact('tickets'));
+        }
+        elseif(Gate::allows('staff-ticket_access')){
+            $tickets = Ticket::where('admin_id', Auth::user()->id)->get();
+            return view('tickets.search', compact('tickets'));
+        }
+        return view('tickets.search', compact('tickets'));
+
+    }
 }
