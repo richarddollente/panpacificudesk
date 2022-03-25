@@ -5,9 +5,18 @@
                 {{ __('Admin Tickets List') }}
             </h2>
         </div>
-        <a href="{{ route('tickets.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            Create Ticket
-        </a>
+        @if(request()->has('view_deleted'))
+            <a href="{{ route('tickets.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                Index
+            </a>
+        @else
+            <a href="{{ route('tickets.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                Create Ticket
+            </a>
+            <a href="{{ route('tickets.index', ['view_deleted' => 'DeletedRecords']) }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                Archive
+            </a>
+        @endif
 
     </x-slot>
 
@@ -93,13 +102,18 @@
                                         </td>
 
                                         <td class="px-2 py-4 whitespace-nowrap text-sm font-small">
-                                            <a href="{{ route('tickets.show', $ticket->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
-                                            <a href="{{ route('tickets.edit', $ticket->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
-                                            <form class="inline-block" action="{{ route('tickets.destroy', $ticket->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <input type="submit" class="text-red-600 hover:text-red-900 mb-2 mr-2" value="Delete">
-                                            </form>
+                                            @if(request()->has('view_deleted'))
+                                                <a href="{{ route('tickets.restore', $ticket->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">Restore</a>
+                                            @else
+                                                <a href="{{ route('tickets.show', $ticket->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
+                                                <a href="{{ route('tickets.edit', $ticket->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
+                                                <form class="inline-block" action="{{ route('tickets.destroy', $ticket->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="submit" class="text-red-600 hover:text-red-900 mb-2 mr-2" value="Archive">
+                                                </form>
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -111,4 +125,5 @@
             </div>
         </div>
     </div>
+
 </x-app-layout>

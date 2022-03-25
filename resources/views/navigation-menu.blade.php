@@ -29,7 +29,7 @@
                     </div>
                 @endcan
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('notifications') }}" :active="request()->routeIs('notifications')">
+                    <x-jet-nav-link href="{{ route('notifications.index') }}" :active="request()->routeIs('notifications')">
                         {{ __('Notifications') }}
                     </x-jet-nav-link>
                 </div>

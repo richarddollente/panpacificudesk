@@ -28,9 +28,17 @@
                     </x-jet-nav-link>
                 </div>
                 @endcan
+                @can('dashboard_access')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ url('/activity-logs') }}">
+                            Activity Logs
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('notifications') }}" :active="request()->routeIs('notifications')">
-                        {{ __('Notifications') }}
+                    <x-jet-nav-link href="{{ route('notifications.index') }}" :active="request()->routeIs('notifications.*')">
+                        {{ __('Notifications') }} <span class="badge font-semibold text-gray-800">{{ auth()->user()->unreadNotifications->count() }}</span>
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -152,10 +160,10 @@
             </x-jet-responsive-nav-link>
         </div>
         @endcan
-        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-            <x-jet-nav-link href="{{ route('notifications') }}" :active="request()->routeIs('notifications')">
-                {{ __('Notifications') }}
-            </x-jet-nav-link>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('notifications.index') }}" :active="request()->routeIs('notifications')">
+                Notifications <span class="badge font-semibold text-gray-800">{{ auth()->user()->unreadNotifications->count() }}</span>
+            </x-jet-responsive-nav-link>
         </div>
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

@@ -93,7 +93,7 @@
                                         Updated At
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $ticket->updated_at }}, {{ $ticket->updated_at->diffForHumans() }}
+                                        {{ $ticket->updated_at->toDayDateTimeString() }}, {{ $ticket->updated_at->diffForHumans() }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -101,7 +101,7 @@
                                         Created At
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $ticket->created_at }}
+                                        {{ $ticket->created_at->toDayDateTimeString() }}
                                     </td>
                                 </tr>
                             </table>
@@ -116,7 +116,7 @@
                             <table class="min-w-full divide-y divide-gray-200 w-full">
                                 <tr class="border-b">
                                     <th scope="col" class="px-6 py-3 bg-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        <a name="CommentSection">
+                                        <a id="CommentSection">
                                             Comment Section
                                         </a>
                                     </th>
@@ -127,6 +127,8 @@
                                 @foreach ($ticket->comments as $comment)
                                 <tr class="border-b">
                                     <th width="15" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        <a id="{{ $comment->id }}">
+                                        </a>
                                         <img class="h-8 w-8 rounded-full object-cover" src="http://127.0.0.1:8000/storage/default-account.png" alt="" />
                                         {{ (DB::table('users')->where('id', ($comment->user_id))->value('name')) }}
                                         <br>

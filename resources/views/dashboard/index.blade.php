@@ -7,17 +7,12 @@
 
     <main>
         <!-- Main dashboard content-->
-        <div class="container-xl p-5">
+        <div id="" class="container-xl p-5">
             <div class="row justify-content-between align-items-center mb-5">
                 <div class="col flex-shrink-0 mb-5 mb-md-0">
-                    <h1 class="display-4 mb-0">Statistics</h1>
                     <div class="text-muted">Ticket and User overview</div>
-                    <a onclick="window.print()">
-                        <button class="btn bg-green-500 hover:bg-green-700 btn-lg text-white" type="button">Print</button>
-                    </a>
                 </div>
             </div>
-
             <!-- Colored status cards-->
             <div class="row gx-5">
                 <div class="col-xxl-3 col-md-6 mb-5">
@@ -130,8 +125,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="row justify-content-between align-items-center mb-5">
+                    <div class="col flex-shrink-0 mb-5 mb-md-0">
+                        <a onclick="window.print()">
+                            <button class="btn bg-green-500 hover:bg-green-700 btn-lg text-white" type="button">Print</button>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
+
     </main>
     <script type="text/javascript">
 
