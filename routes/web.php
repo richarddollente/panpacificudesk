@@ -24,14 +24,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
 Route::post('/tickets/{ticket}/comments', 'App\Http\Controllers\CommentsController@store');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('tickets', \App\Http\Controllers\TicketController::class);
+    Route::resource('notifications', \App\Http\Controllers\NotificationController::class);
     Route::resource('users', \App\Http\Controllers\UsersController::class);
+    Route::resource('tickets', \App\Http\Controllers\TicketController::class);
     Route::resource('dashboard', \App\Http\Controllers\DashboardController::class);
+    Route::get('activity-logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 });
 
-Route::get('/notifications', function () {
-    return view('notifications');
-})->middleware(['auth'])->name('notifications');
+Route::get('tickets/restore/{id}', [\App\Http\Controllers\TicketController::class, 'restore'])->name('tickets.restore');
 
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
