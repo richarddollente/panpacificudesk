@@ -3,6 +3,7 @@
 namespace Illuminate\Auth;
 
 use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Support\Facades\Log;
 
 trait MustVerifyEmail
 {
@@ -36,6 +37,7 @@ trait MustVerifyEmail
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmail);
+        Log::info("User:" . $request['email'] . " reset password link sent.");
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 use Laravel\Fortify\Actions\CompletePasswordReset;
 use Laravel\Fortify\Contracts\FailedPasswordResetResponse;
@@ -58,6 +59,8 @@ class NewPasswordController extends Controller
             'token' => 'required',
             Fortify::email() => 'required|email',
         ]);
+        Log::info("User:" . $request['email'] . " reset password link sent.");
+
 
         // Here we will attempt to reset the user's password. If it is successful we
         // will update the password on an actual user model and persist it to the

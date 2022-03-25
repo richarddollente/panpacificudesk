@@ -2,6 +2,7 @@
 
 namespace Laravel\Fortify\Actions;
 
+use Illuminate\Support\Facades\Log;
 use Laravel\Fortify\LoginRateLimiter;
 
 class PrepareAuthenticatedSession
@@ -34,7 +35,7 @@ class PrepareAuthenticatedSession
     public function handle($request, $next)
     {
         $request->session()->regenerate();
-
+        Log::info("User: " . ($request['email']) . " login successful.");
         $this->limiter->clear($request);
 
         return $next($request);

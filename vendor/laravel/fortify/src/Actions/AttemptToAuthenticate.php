@@ -4,6 +4,7 @@ namespace Laravel\Fortify\Actions;
 
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\LoginRateLimiter;
@@ -73,11 +74,13 @@ class AttemptToAuthenticate
 
         if (! $user) {
             $this->fireFailedEvent($request);
+            Log::info("User: " . ($request['email']) . " login failed.");
 
             return $this->throwFailedAuthenticationException($request);
         }
 
         $this->guard->login($user, $request->filled('remember'));
+
 
         return $next($request);
     }
@@ -97,6 +100,7 @@ class AttemptToAuthenticate
         throw ValidationException::withMessages([
             Fortify::username() => [trans('auth.failed')],
         ]);
+
     }
 
     /**
@@ -107,9 +111,11 @@ class AttemptToAuthenticate
      */
     protected function fireFailedEvent($request)
     {
+
         event(new Failed(config('fortify.guard'), null, [
             Fortify::username() => $request->{Fortify::username()},
             'password' => $request->password,
         ]));
+
     }
 }

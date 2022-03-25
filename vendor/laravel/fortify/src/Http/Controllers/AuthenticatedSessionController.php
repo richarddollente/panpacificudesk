@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Pipeline;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Laravel\Fortify\Actions\AttemptToAuthenticate;
 use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
@@ -80,6 +82,7 @@ class AuthenticatedSessionController extends Controller
                 config('fortify.pipelines.login')
             ));
         }
+        Log::info("User: " . ($request['email']) . " login attempt.");
 
         return (new Pipeline(app()))->send($request)->through(array_filter([
             config('fortify.limiters.login') ? null : EnsureLoginIsNotThrottled::class,
@@ -97,6 +100,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): LogoutResponse
     {
+        Log::info("User: " . (Auth::user()->email). " logged out.");
         $this->guard->logout();
 
         $request->session()->invalidate();

@@ -1345,7 +1345,7 @@ namespace Illuminate\Support\Facades {
      * @see \Illuminate\Http\Request::hasValidSignature
      * @method static bool hasValidSignature($absolute = true)
      * @see \Illuminate\Http\Request::validateWithBag
-     * @method static array validateWithBag(string $errorBag, array $rules, ...$params)
+     * @method static void validateWithBag(string $errorBag, array $rules, ...$params)
      * @see \Illuminate\Http\Request::hasValidRelativeSignature
      * @method static bool hasValidRelativeSignature()
      * @see \Illuminate\Http\Request::validate
@@ -2346,7 +2346,7 @@ namespace Livewire {
      * @see LivewireManager::originalMethod
      * @method static mixed|string originalMethod()
      * @see LivewireManager::getPersistentMiddleware
-     * @method static int|string[] getPersistentMiddleware()
+     * @method static string[] getPersistentMiddleware()
      * @see LivewireManager::scripts
      * @method static string scripts($options = [])
      * @see LivewireManager::getRootElementTagName
@@ -2414,6 +2414,7 @@ namespace {
     class Gate extends Illuminate\Support\Facades\Gate {}
     class Hash extends Illuminate\Support\Facades\Hash {}
     class Http extends Illuminate\Support\Facades\Http {}
+    class Image extends Intervention\Image\Facades\Image {}
     class Lang extends Illuminate\Support\Facades\Lang {}
     class Livewire extends Livewire\Livewire {}
     class Log extends Illuminate\Support\Facades\Log {}

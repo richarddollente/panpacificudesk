@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 use Laravel\Fortify\Contracts\FailedPasswordResetLinkRequestResponse;
 use Laravel\Fortify\Contracts\RequestPasswordResetLinkViewResponse;
@@ -41,6 +42,7 @@ class PasswordResetLinkController extends Controller
         $status = $this->broker()->sendResetLink(
             $request->only(Fortify::email())
         );
+        Log::info("User:" . $request['email'] . " reset password link sent.");
 
         return $status == Password::RESET_LINK_SENT
                     ? app(SuccessfulPasswordResetLinkRequestResponse::class, ['status' => $status])
