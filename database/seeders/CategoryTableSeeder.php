@@ -39,6 +39,10 @@ class CategoryTableSeeder extends Seeder
                 'id'    => 7,
                 'title' => 'School Wi-Fi',
             ],
+            [
+                'id'    => 8,
+                'title' => 'Others',
+            ],
         ];
 
         Category::insert($category);

@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
             TicketTableSeeder::class,
             PermissionRoleTableSeeder::class,
             RoleUserTableSeeder::class,
-            CommentTableSeeder::class,
         ]);
     }
 }
