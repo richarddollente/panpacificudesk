@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -25,14 +26,23 @@ class TicketController extends Controller
         $query = $request->input('query');
         if ($query===NULL){
             $tickets = Ticket::all();
+
+            if($request->has('view_deleted'))
+            {
+                Log::info("User: " . (Auth::user()->email) . " viewed Ticket Archive index.");
+                $tickets = Ticket::onlyTrashed()->get();
+            }
             if(Gate::allows('ticket_access')){
                 $tickets = Ticket::where('user_id', Auth::user()->id)->get();
+                Log::info("User: " . (Auth::user()->email) . " viewed Ticket User index.");
                 return view('tickets.index', compact('tickets'));
             }
             elseif(Gate::allows('staff-ticket_access')){
                 $tickets = Ticket::where('admin_id', Auth::user()->id)->get();
+                Log::info("User: " . (Auth::user()->email) . " viewed Ticket Staff index.");
                 return view('tickets.staff', compact('tickets'));
             }
+            Log::info("User: " . (Auth::user()->email) . " viewed Ticket Admin index.");
             return view('tickets.admin', compact('tickets'));
 
         }
@@ -41,17 +51,21 @@ class TicketController extends Controller
             if(Gate::allows('ticket_access')){
                 if(ctype_digit($query)){
                     $tickets = Ticket::where('user_id', Auth::user()->id)->where('id', 'LIKE','%' . $query . '%' )->get();
+                    Log::info("User: " . (Auth::user()->email) . " searched for " . $query . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 else{
                     $tickets = Ticket::where('user_id', Auth::user()->id)->where('subject', 'LIKE','%' . $query . '%' )->get();
+                    Log::info("User: " . (Auth::user()->email) . " searched for " . $query . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
             }
             elseif(Gate::allows('staff-ticket_access')){
                 $tickets = Ticket::where('admin_id', Auth::user()->id)->andWhere('id', 'LIKE','%' . $query . '%' )->orWhere('subject', 'LIKE','%' . $query . '%' )->get();
+                Log::info("User: " . (Auth::user()->email) . " searched for " . $query . " on Ticket Staff index.");
                 return view('tickets.staff', compact('tickets'));
             }
+            Log::info("User: " . (Auth::user()->email) . " searched for " . $query . " on Ticket Admin index.");
             return view('tickets.admin', compact('tickets'));
         }
 
@@ -59,6 +73,7 @@ class TicketController extends Controller
 
     public function create()
     {
+        Log::info("User: " . (Auth::user()->email) . " redirected to Ticket Create.");
         return view('tickets.create');
     }
 
@@ -91,6 +106,7 @@ class TicketController extends Controller
                 'priority_id' => 3,
             ]);
         }
+        Log::info("User: " . (Auth::user()->email) . " created Ticket Subject: ". $request['subject'] . ".");
         return redirect()->route(route:'tickets.index');
     }
 
@@ -103,26 +119,30 @@ class TicketController extends Controller
             $status = DB::table('statuses')->where('id', ($ticket->status_id))->value('title');
             $priority = DB::table('priorities')->where('id', ($ticket->priority_id))->value('title');
             $admin = DB::table('users')->where('id', ($ticket->admin_id))->value('name');
+            Log::info("User: " . (Auth::user()->email) . " viewed Ticket: ". $ticket->id . ".");
             return view('tickets.show', compact('ticket', 'username', 'category', 'status', 'priority', 'admin'));
         }
         else
         {
+            Log::warning("User: " . (Auth::user()->email) . " cannot view Ticket: ". $ticket->id . ".");
             return view('tickets.403');
         }
     }
 
-    public function edit(Ticket $ticket)
+    public function edit(Ticket $ticket, Request $request)
     {
-        if(Gate::allows('admin-ticket_access') || Gate::allows('staff-ticket_access'))
+        if (Gate::allows('admin-ticket_access') || Gate::allows('staff-ticket_access'))
             {
                 $categories = Category::pluck('title', 'id');
                 $statuses = Status::pluck('title', 'id');
                 $priorities = Priority::pluck('title', 'id');
                 $admins = DB::table('users')->where('class_id','1')->pluck('name', 'id');
+                Log::info("User: " . (Auth::user()->email) . " redirected to Edit Ticket: ". $ticket->id . ".");
                 return view('tickets.edit', compact('ticket', 'categories', 'statuses', 'priorities', 'admins'));
             }
         else
         {
+            Log::warning("User: " . (Auth::user()->email) . " cannot edit Ticket: ". $ticket->id . ".");
             return view('tickets.403');
         }
     }
@@ -138,13 +158,21 @@ class TicketController extends Controller
             'priority_id' => $request['priority_id'],
             'updated_at' => date("Y-m-d H:i:s"),
         ]);
+        Log::info("User: " . (Auth::user()->email) . " updated Ticket: ". $ticket->id . ".");
         return redirect()->route(route:'tickets.index');
     }
 
     public function destroy(Ticket $ticket)
     {
+        Log::info("User: " . (Auth::user()->email) . " deleted Ticket: ". $ticket->id . ".");
         $ticket->delete();
         return redirect()->route(route:'tickets.index');
-    }
 
+    }
+    public function restore($id)
+    {
+        Log::info("User: " . (Auth::user()->email) . " restored Ticket: ". $id . ".");
+        Ticket::withTrashed()->find($id)->restore();
+        return redirect()->route(route:'tickets.index');
+    }
 }

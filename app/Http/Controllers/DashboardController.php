@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Gate;
 
@@ -11,6 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        Log::info("User: " . (Auth::user()->email) . " viewed Dashboard index.");
         abort_if(Gate::denies('dashboard_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $usercount = DB::table('users')->count();

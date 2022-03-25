@@ -2,7 +2,9 @@
 
 namespace App\Actions\Fortify;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\UpdatesUserPasswords;
 
@@ -31,5 +33,6 @@ class UpdateUserPassword implements UpdatesUserPasswords
         $user->forceFill([
             'password' => $input['password'],
         ])->save();
+        Log::info("User: " . (Auth::user()->email) . " updated password.");
     }
 }
