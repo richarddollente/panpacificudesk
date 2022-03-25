@@ -21,6 +21,9 @@ class StoreUserRequest extends FormRequest
             'password' => [
                 'required',
             ],
+            'class_id' => [
+                'required',
+            ],
             'roles.*'  => [
                 'integer',
             ],
@@ -28,6 +31,7 @@ class StoreUserRequest extends FormRequest
                 'required',
                 'array',
             ],
+
         ];
     }
 

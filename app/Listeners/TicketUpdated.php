@@ -4,6 +4,8 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Models\User;
+use App\Models\Comment;
 
 class TicketUpdated
 {
@@ -12,6 +14,9 @@ class TicketUpdated
      *
      * @return void
      */
+
+    public $comment;
+
     public function __construct()
     {
         //
@@ -25,6 +30,8 @@ class TicketUpdated
      */
     public function handle($event)
     {
-        //
+
+
     }
+
 }

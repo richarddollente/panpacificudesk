@@ -27,6 +27,14 @@ class Ticket extends Model implements HasMedia
 
     ];
 
+    protected $casts = [
+        'data' => 'array',
+    ];
+
+    protected $dates = [
+        'deleted_at'
+    ];
+
     public function users()
     {
         return $this->hasOne(User::class);
