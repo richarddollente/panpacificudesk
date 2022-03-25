@@ -37,10 +37,10 @@ var ctx = document.getElementById('myCategoryPieChart').getContext('2d');
 var myCategoryPieChart = new Chart(ctx, {
     type: 'pie',
     data: {
-        labels: ['Uncategorized', 'PU Official Website', 'AIMS', 'Google Classroom', 'PU Email', 'Computer Laboratory', 'School Wi-Fi'],
+        labels: ['Uncategorized', 'PU Official Website', 'AIMS', 'Google Classroom', 'PU Email', 'Computer Laboratory', 'School Wi-Fi', 'Others'],
         datasets: [{
             data: [uccount, puowcount, aimscount, gccount, puecount, clcount, swcount],
-            backgroundColor: [OrangeColor, BlueColor, IndigoColor, RedColor, CyanColor, GreenColor, DarkColor],
+            backgroundColor: [OrangeColor, BlueColor, IndigoColor, RedColor, CyanColor, GreenColor, DarkColor, YellowColor],
         }],
     },
 });
