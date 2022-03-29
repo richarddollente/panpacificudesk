@@ -70,7 +70,7 @@ class UsersController extends Controller
     {
         $user->update($request->validated());
         $user->roles()->sync($request->input('roles', []));
-        DB::table('tickets')->where('id', $user->id)->update([
+        DB::table('users')->where('id', $user->id)->update([
             'class_id' => $request['class_id'],
         ]);
         Log::info("User: " . (Auth::user()->email) . " updated User ID: ". $user->id . ".");
