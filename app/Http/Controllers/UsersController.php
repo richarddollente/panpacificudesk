@@ -17,10 +17,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->input('query');
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $users = User::with('roles')->get();
+        if($query!=NULL)
+        {
+            $users = User::where('name', 'LIKE','%' . $query . '%' )->get();
+        }
         Log::info("User: " . (Auth::user()->email) . " viewed User index.");
         return view('users.index', compact('users'));
     }
