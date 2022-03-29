@@ -15,8 +15,8 @@ class NotificationController extends Controller
     public function index()
     {
         Log::info("User: " . (Auth::user()->email) . " viewed Notification index.");
-        $notifications = auth()->user()->unreadNotifications;
-        return view('notifications.index', compact('notifications'));
+        $commentnotifications = auth()->user()->unreadNotifications;
+        return view('notifications.index', compact('commentnotifications'));
     }
 
     public function show($id)
