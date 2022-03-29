@@ -11,12 +11,10 @@ class PermissionRoleTableSeeder extends Seeder
 {
     public function run()
     {
-        Permission::findOrFail(3)->roles()->sync(1);
-        Permission::findOrFail(1)->roles()->sync(1);
-        Permission::findOrFail(5)->roles()->sync(1);
-        Permission::findOrFail(1)->roles()->sync(3);
-        Permission::findOrFail(4)->roles()->sync(3);
-        Permission::findOrFail(2)->roles()->sync(2);
-        Permission::findOrFail(1)->roles()->sync(1);
+        Permission::find(1)->roles()->sync(1);
+        Permission::find(3)->roles()->sync(1);
+        Permission::find(5)->roles()->sync(1);
+        Permission::find(2)->roles()->sync(2);
+        Permission::find(4)->roles()->sync(3);
     }
 }
