@@ -15,20 +15,29 @@ class NotificationController extends Controller
     public function index()
     {
         Log::info("User: " . (Auth::user()->email) . " viewed Notification index.");
-        $commentnotifications = auth()->user()->unreadNotifications;
-        return view('notifications.index', compact('commentnotifications'));
+        $commentnotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\CommentTicketNotification');
+        $newticketnotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\NewTicketNotification');
+        $updatedticketnotifications = auth()->user()->unreadNotifications->where('type','App\Notifications\UpdatedTicketNotification');
+        return view('notifications.index', compact('commentnotifications','newticketnotifications','updatedticketnotifications'));
     }
 
     public function show($id)
     {
-
         $notification = auth()->user()->notifications()->where('id', $id)->first();
         $ticket_id = str_replace('"', "", json_encode($notification->data['ticket_id']));
-        $comment_id = str_replace('"', "", json_encode($notification->data['comment_id']));
-        Log::info("User: " . (Auth::user()->email) . " viewed Notification: Ticket: ". $ticket_id ." Comment: ". $comment_id .".");
-        if ($notification) {
+        if((DB::table('notifications')->where('id',$notification->id)->value('type')) === 'App\Notifications\CommentTicketNotification')
+        {
+            $comment_id = str_replace('"', "", json_encode($notification->data['comment_id']));
             $notification->markAsRead();
+            Log::info("User: " . (Auth::user()->email) . " viewed Notification: Ticket: ". $ticket_id ." Comment: ". $comment_id .".");
             return redirect()->route('tickets.show', $ticket_id.'#'.$comment_id);
+        }
+        else
+        {
+            Log::info("User: " . (Auth::user()->email) . " viewed Notification: Ticket: ". $ticket_id);
+            $notification->markAsRead();
+            return redirect()->route('tickets.show', $ticket_id);
+
         }
     }
 }
