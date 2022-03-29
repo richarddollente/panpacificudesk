@@ -17,21 +17,40 @@
                                     <th scope="col" width="50" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Notification
                                     </th>
-                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Action
-                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($notifications as $notification)
-                                    <tr>
-                                        <td class="px-6 py-4whitespace-nowrap text-sm text-gray-900">
-                                            {{ str_replace('"', "", json_encode($notification->data['username'])) }} commented on Ticket {{ str_replace('"', "", json_encode($notification->data['ticket_id'])) }}: {{ json_encode($notification->data['comment_body']) }}
+                                @foreach ($commentnotifications as $commentnotification)
+                                    <tr onclick="document.getElementById('{{ $commentnotification->id }}').click();" style="cursor: pointer" class="hover:bg-green-200">
+                                        <a href="{{ route('notifications.show', $commentnotification->id) }}" id='{{ $commentnotification->id }}'>
+                                        <td height="50" class="px-6 py-4whitespace-nowrap text-sm text-gray-900">
+                                            {{ str_replace('"', "", json_encode($commentnotification->data['username'])) }} commented on Ticket
+                                            {{ str_replace('"', "", json_encode($commentnotification->data['ticket_id'])) }}:
+                                            {{ json_encode($commentnotification->data['comment_body']) }}
                                         </td>
-                                        <td width="15" class="px-2 py-2 whitespace-nowrap text-sm text-gray-900">
-                                            <a href="{{ route('notifications.update', $notification->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
-                                        </td>
-
+                                        </a>
+                                    </tr>
+                                @endforeach
+                                @foreach ($newticketnotifications as $newticketnotification)
+                                    <tr onclick="document.getElementById('{{ $newticketnotification->id }}').click();" style="cursor: pointer" class="hover:bg-green-200">
+                                        <a href="{{ route('notifications.show', $newticketnotification->id) }}" id='{{ $newticketnotification->id }}'>
+                                            <td height="50" class="px-6 py-4whitespace-nowrap text-sm text-gray-900">
+                                                {{ str_replace('"', "", json_encode($newticketnotification->data['username'])) }} created  Ticket:
+                                                {{ str_replace('"', "", json_encode($newticketnotification->data['ticket_id'])) }}
+                                            </td>
+                                        </a>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                @foreach ($updatedticketnotifications as $updatedticketnotification)
+                                    <tr onclick="document.getElementById('{{ $updatedticketnotification->id }}').click();" style="cursor: pointer" class="hover:bg-green-200">
+                                        <a href="{{ route('notifications.update', $updatedticketnotification->id) }}" id='{{ $updatedticketnotification->id }}'>
+                                            <td height="50" class="px-6 py-4whitespace-nowrap text-sm text-gray-900">
+                                                {{ str_replace('"', "", json_encode($updatedticketnotification->data['username'])) }} updated Ticket:
+                                                {{ str_replace('"', "", json_encode($updatedticketnotification->data['ticket_id'])) }}
+                                            </td>
+                                        </a>
                                     </tr>
                                 @endforeach
                                 </tbody>

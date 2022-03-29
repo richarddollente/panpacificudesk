@@ -126,7 +126,7 @@
                                 </tr>
                                 @foreach ($ticket->comments as $comment)
                                 <tr class="border-b">
-                                    <th width="15" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    <th style="width: 15px"  class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 tracking-wider">
                                         <a id="{{ $comment->id }}">
                                         </a>
                                         <img class="h-8 w-8 rounded-full object-cover" src="http://127.0.0.1:8000/storage/default-account.png" alt="" />
