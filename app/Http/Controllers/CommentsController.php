@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Notifications\UpdatedTicketNotification;
+use App\Notifications\CommentTicketNotification;
 use App\Models\User;
 use App\Models\Ticket;
 use App\Models\Comment;
@@ -30,16 +30,16 @@ class CommentsController extends Controller
 
         if((Auth::user()->id) === (DB::table('tickets')->where('id', $ticket->id)->value('user_id')))
         {
-            User::find($admin)->notify(new UpdatedTicketNotification($comment));
+            User::find($admin)->notify(new CommentTicketNotification($comment));
         }
         elseif ((Auth::user()->id) === (DB::table('tickets')->where('id', $ticket->id)->value('admin_id')))
         {
-            User::find($user)->notify(new UpdatedTicketNotification($comment));
+            User::find($user)->notify(new CommentTicketNotification($comment));
         }
         else
         {
-            User::find($user)->notify(new UpdatedTicketNotification($comment));
-            User::find($admin)->notify(new UpdatedTicketNotification($comment));
+            User::find($user)->notify(new CommentTicketNotification($comment));
+            User::find($admin)->notify(new CommentTicketNotification($comment));
         }
         $comment_id = $comment->id;
 
