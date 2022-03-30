@@ -124,7 +124,7 @@
 
                                     </td>
                                 </tr>
-                                @foreach ($ticket->comments as $comment)
+                                @foreach ($comments as $comment)
                                 <tr class="border-b">
                                     <th style="width: 15px"  class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 tracking-wider">
                                         <a id="{{ $comment->id }}">
@@ -134,7 +134,7 @@
                                         <br>
                                         {{ (DB::table('users')->where('id', ($comment->user_id))->value('email')) }}
                                         <br>
-                                        {{ $comment->created_at->diffForHumans() }}
+                                         {{ (\Carbon\Carbon::parse($comment->created_at))->diffForHumans() }}
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
                                         {{ $comment->body }}
