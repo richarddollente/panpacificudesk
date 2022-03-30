@@ -20,6 +20,11 @@ class Comment extends Model
         'ticket_id',
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
     protected $casts = [
         'data' => 'array',
     ];
