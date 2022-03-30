@@ -22,6 +22,8 @@ class CommentsController extends Controller
             'ticket_id' => $ticket->id,
             'user_id' => Auth::user()->id,
         ]);
+
+
         Log::info("User: " . (Auth::user()->email) . " commented on: Ticket: ". $ticket->id ." Comment: ". $comment->body .".");
 
         DB::table('tickets')->where('id', $ticket->id)->update([

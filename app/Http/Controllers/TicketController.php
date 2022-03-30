@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Database\Eloquent\Collection;
+use Carbon\Carbon;
 
 class TicketController extends Controller
 {
@@ -479,7 +480,10 @@ class TicketController extends Controller
             $priority = DB::table('priorities')->where('id', ($ticket->priority_id))->value('title');
             $admin = DB::table('users')->where('id', ($ticket->admin_id))->value('name');
             Log::info("User: " . (Auth::user()->email) . " viewed Ticket: ". $ticket->id . ".");
-            return view('tickets.show', compact('ticket', 'username', 'category', 'status', 'priority', 'admin'));
+
+            $comments = DB::table('comments')->where('ticket_id', $ticket->id)->orderBy('created_at','asc')->get();
+
+            return view('tickets.show', compact('ticket', 'username', 'category', 'status', 'priority', 'admin', 'comments'));
         }
         else
         {
