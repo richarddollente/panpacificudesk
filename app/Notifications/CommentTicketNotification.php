@@ -63,6 +63,7 @@ class CommentTicketNotification extends Notification
             'username' => (DB::table('users')->where('id', (Auth::user()->id))->value('name')),
             'ticket_id' => $this->comment->ticket_id,
             'comment_id' => $this->comment->id,
+            'comment_body' => $this->comment->body,
         ];
     }
 }
