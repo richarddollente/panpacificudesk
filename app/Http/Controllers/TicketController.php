@@ -38,21 +38,24 @@ class TicketController extends Controller
                 abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
                 Log::info("User: " . (Auth::user()->email) . " viewed Ticket Archive index.");
                 $tickets = Ticket::onlyTrashed()->get();
+                return view('tickets.admin', compact('tickets'));
             }
 
             if(Gate::allows('ticket_access'))
             {
-                $tickets = Ticket::where('user_id', Auth::user()->id)->get();
+                $tickets = Ticket::where('user_id', Auth::user()->id)->orderBy('id','desc')->get();
                 Log::info("User: " . (Auth::user()->email) . " viewed Ticket User index.");
                 return view('tickets.index', compact('tickets'));
             }
             elseif(Gate::allows('staff-ticket_access'))
             {
-                $tickets = Ticket::where('admin_id', Auth::user()->id)->get();
+                $tickets = Ticket::where('admin_id', Auth::user()->id)->orderBy('id','desc')->get();
                 Log::info("User: " . (Auth::user()->email) . " viewed Ticket Staff index.");
                 return view('tickets.staff', compact('tickets'));
             }
+            $tickets = Ticket::orderBy('id','desc')->get();
             Log::info("User: " . (Auth::user()->email) . " viewed Ticket Admin index.");
+
             return view('tickets.admin', compact('tickets'));
         }
         elseif($query!=NULL){
@@ -60,13 +63,13 @@ class TicketController extends Controller
             {
                 if(ctype_digit($query))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('id', 'LIKE','%' . $query . '%' )->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('id', 'LIKE','%' . $query . '%' )->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " searched for " . $query . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 else
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('subject', 'LIKE','%' . $query . '%' )->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('subject', 'LIKE','%' . $query . '%' )->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " searched for " . $query . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
@@ -75,20 +78,20 @@ class TicketController extends Controller
             {
                 if(ctype_digit($query))
                 {
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('id', 'LIKE','%' . $query . '%' )->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('id', 'LIKE','%' . $query . '%' )->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " searched for " . $query . " on Ticket User index.");
                     return view('tickets.staff', compact('tickets'));
                 }
                 else
                 {
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('subject', 'LIKE','%' . $query . '%' )->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('subject', 'LIKE','%' . $query . '%' )->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " searched for " . $query . " on Ticket User index.");
                     return view('tickets.staff', compact('tickets'));
                 }
             }
             elseif(Gate::allows('admin-ticket_access'))
             {
-                $tickets = Ticket::where('id', 'LIKE','%' . $query . '%' )->orWhere('subject', 'LIKE','%' . $query . '%' )->get();
+                $tickets = Ticket::where('id', 'LIKE','%' . $query . '%' )->orWhere('subject', 'LIKE','%' . $query . '%' )->orderBy('id','desc')->get();
                 Log::info("User: " . (Auth::user()->email) . " searched for " . $query . " on Ticket Admin index.");
                 return view('tickets.admin', compact('tickets'));
             }
@@ -99,13 +102,13 @@ class TicketController extends Controller
                 $tickets = Ticket::where('priority_id', 1)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('priority_id', 1)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('priority_id', 1)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access'))
                 {
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('priority_id', 1)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('priority_id', 1)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -117,12 +120,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('priority_id', 2)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('priority_id', 2)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('priority_id', 2)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('priority_id', 2)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('priority_id', 2)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -134,13 +137,13 @@ class TicketController extends Controller
                 $tickets = Ticket::where('priority_id', 3)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('priority_id', 3)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('priority_id', 3)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access'))
                 {
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('priority_id', 3)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('priority_id', 3)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -152,12 +155,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('priority_id', 4)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('priority_id', 4)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('priority_id', 4)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('priority_id', 4)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('priority_id', 4)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -169,12 +172,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('status_id', 1)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('status_id', 1)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('status_id', 1)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('status_id', 1)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('status_id', 1)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -186,12 +189,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('status_id', 2)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('status_id', 2)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('status_id', 2)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('status_id', 2)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('status_id', 2)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -203,12 +206,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('status_id', 3)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('status_id', 3)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('status_id', 3)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('status_id', 3)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('status_id', 3)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -220,12 +223,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('category_id', 1)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 1)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 1)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 1)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 1)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -237,12 +240,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('category_id', 2)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 2)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 2)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 2)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 2)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -254,12 +257,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('category_id', 3)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 3)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 3)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 3)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 3)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -271,12 +274,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('category_id', 4)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 4)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 4)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 4)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 4)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -288,12 +291,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('category_id', 5)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 5)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 5)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 5)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 5)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -305,12 +308,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('category_id', 6)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 6)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 6)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 6)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 6)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -322,12 +325,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('category_id', 7)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 7)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 7)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 7)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 7)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -339,12 +342,12 @@ class TicketController extends Controller
                 $tickets = Ticket::where('category_id', 8)->get();
                 if(Gate::allows('ticket_access'))
                 {
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 8)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->where('category_id', 8)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 8)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->where('category_id', 8)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " filtered for " . $filter . " on Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
@@ -410,12 +413,12 @@ class TicketController extends Controller
             {
                 $tickets = Ticket::all();
                 if(Gate::allows('ticket_access')){
-                    $tickets = Ticket::where('user_id', Auth::user()->id)->get();
+                    $tickets = Ticket::where('user_id', Auth::user()->id)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " viewed Ticket User index.");
                     return view('tickets.index', compact('tickets'));
                 }
                 elseif(Gate::allows('staff-ticket_access')){
-                    $tickets = Ticket::where('admin_id', Auth::user()->id)->get();
+                    $tickets = Ticket::where('admin_id', Auth::user()->id)->orderBy('id','desc')->get();
                     Log::info("User: " . (Auth::user()->email) . " viewed Ticket Staff index.");
                     return view('tickets.staff', compact('tickets'));
                 }
