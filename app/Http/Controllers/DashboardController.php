@@ -31,8 +31,9 @@ class DashboardController extends Controller
         $puecount = DB::table('tickets')->where('category_id', '5')->count();
         $clcount = DB::table('tickets')->where('category_id', '6')->count();
         $swcount = DB::table('tickets')->where('category_id', '7')->count();
+        $otcount = DB::table('tickets')->where('category_id', '8')->count();
 
 
-        return view('dashboard.index', compact('usercount', 'ticketcount', 'opencount', 'inprogresscount', 'closecount', 'criticalcount', 'highcount', 'mediumcount', 'lowcount', 'uccount', 'puowcount', 'aimscount', 'gccount', 'puecount', 'clcount', 'swcount'));
+        return view('dashboard.index', compact('usercount', 'ticketcount', 'opencount', 'inprogresscount', 'closecount', 'criticalcount', 'highcount', 'mediumcount', 'lowcount', 'uccount', 'puowcount', 'aimscount', 'gccount', 'puecount', 'clcount', 'swcount', 'otcount'));
     }
 }

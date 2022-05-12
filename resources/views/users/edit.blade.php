@@ -31,14 +31,6 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <x-jet-label for="password" value="{{ __('Password') }}" />
-                            <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-                            @error('password')
-                                <p class="text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="class" class="block font-medium text-sm text-black">Class</label>
                             <select name="class_id" id="category_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full">
                                 @foreach($classes as $id => $classes)
