@@ -9,16 +9,26 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 
         <!-- Styles -->
+        <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
+        <div class="font-sans text-black antialiased">
             {{ $slot }}
         </div>
+        
+        <section class="chatbox">
+            <a class="chat" style="" href="https://m.me/panpacificu">
+                <button class="chatbutton">
+                    <i class="material-icons">comment</i>
+                </button>
+            </a>
+            </button>
+        </section>
     </body>
 </html>
