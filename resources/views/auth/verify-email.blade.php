@@ -1,10 +1,10 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+            <x-application-logo class="block h-10 w-auto fill-current text-black" />
         </x-slot>
 
-        <div class="mb-4 text-sm text-gray-600">
+        <div class="mb-4 text-sm text-black">
             {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
         </div>
 
@@ -28,7 +28,7 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
 
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
+                <button type="submit" class="underline text-sm text-black-600 hover:text-black-900">
                     {{ __('Logout') }}
                 </button>
             </form>

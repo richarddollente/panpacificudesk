@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="block mb-5">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-black-800 leading-tight">
                 {{ __('User List') }}
             </h2>
         </div>
@@ -33,19 +33,19 @@
                             <table class="min-w-full divide-y divide-gray-200 w-full">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             User ID
                                         </th>
-                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             Name
                                         </th>
-                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             Email
                                         </th>
-                                        <th scope="col" class="px-2 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             Roles
                                         </th>
-                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-black uppercase tracking-wider">
                                             Action
                                         </th>
                                     </tr>
@@ -54,16 +54,16 @@
                                 @foreach ($users as $user)
                                     <tr onclick="document.getElementById('{{ $user->id }}').click();" style="cursor: pointer" class="hover:bg-green-200">
                                         <a href="{{ route('users.show', $user->id) }}" id='{{ $user->id }}'>
-                                        <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                             {{ $user->id }}
                                         </td>
-                                        <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                             {{ $user->name }}
                                         </td>
-                                        <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                             {{ $user->email }}
                                         </td>
-                                        <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                             @foreach ($user->roles as $role)
                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                                     {{ $role->title }}

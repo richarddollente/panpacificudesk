@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-black leading-tight">
             Show User
         </h2>
     </x-slot>
@@ -16,34 +16,34 @@
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-200 w-full">
                                 <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                         ID
                                     </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black bg-white divide-y divide-gray-200">
                                         {{ $user->id }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                         Name
                                     </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black bg-white divide-y divide-gray-200">
                                         {{ $user->name }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                         Email
                                     </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black bg-white divide-y divide-gray-200">
                                         {{ $user->email }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                         Roles
                                     </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black bg-white divide-y divide-gray-200">
                                         @foreach ($user->roles as $role)
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                                     {{ $role->title }}

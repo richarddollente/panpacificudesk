@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-black leading-tight">
             {{ __('Tickets List') }}
         </h2>
     </x-slot>
@@ -20,28 +20,28 @@
                             <table class="min-w-full divide-y divide-gray-200 w-full">
                                 <thead>
                                 <tr>
-                                    <th scope="col" width="50" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" width="50" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                         Ticket ID
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                         Subject
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                         Category
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                         Status
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                         Priority
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                         Admin Assigned
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                         Updated Date
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                         Action
                                     </th>
                                 </tr>
@@ -49,25 +49,25 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($tickets as $ticket)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                             {{ $ticket->id }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                             {{ $ticket->subject }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                             {{ (DB::table('categories')->where('id', ($ticket->category_id))->value('title')) }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                             {{ (DB::table('statuses')->where('id', ($ticket->status_id))->value('title')) }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                             {{ (DB::table('priorities')->where('id', ($ticket->priority_id))->value('title')) }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                             {{ (DB::table('users')->where('id', ($ticket->admin_id))->value('name')) }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                             {{ $ticket->updated_at->diffForHumans() }}
                                         </td>
 

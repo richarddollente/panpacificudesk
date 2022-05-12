@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-black leading-tight">
             Create User
         </h2>
     </x-slot>
@@ -12,7 +12,7 @@
                     @csrf
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="subject" class="block font-medium text-sm text-gray-700">Ticket Subject</label>
+                            <label for="subject" class="block font-medium text-sm text-black">Ticket Subject</label>
                             <input type="text" name="subject" id="subject" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('subject', '') }}" />
                             @error('subject')
@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="description" class="block font-medium text-sm text-gray-700">Description</label>
+                            <label for="description" class="block font-medium text-sm text-black">Description</label>
                             <textarea type="text" name="description" id="description" class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{ old('description', '') }}" /></textarea>
                             @error('description')
                             <p class="text-sm text-red-600">{{ $message }}</p>
@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="file" class="block font-medium text-sm text-gray-700">Supporting file</label>
+                            <label for="file" class="block font-medium text-sm text-black">Supporting file</label>
                             <input type="file" name="ticket_file" placeholder="Choose file" id="ticket_file" class="form-control">
                             @error('file')
                             <p class="text-sm text-red-600">{{ $message }}</p>

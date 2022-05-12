@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="block mb-5">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-black leading-tight">
                 {{ __('Admin Tickets List') }}
             </h2>
         </div>
@@ -141,31 +141,31 @@
                             <table class="min-w-full divide-y divide-gray-200 w-full">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-black uppercase tracking-wider">
                                         Ticket ID
                                     </th>
-                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-black uppercase tracking-wider">
                                         Subject
                                     </th>
-                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-black uppercase tracking-wider">
                                         Submit By
                                     </th>
-                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-black uppercase tracking-wider">
                                         Category
                                     </th>
-                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-black uppercase tracking-wider">
                                         Status
                                     </th>
-                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-black uppercase tracking-wider">
                                         Priority
                                     </th>
-                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-black uppercase tracking-wider">
                                         Admin Assigned
                                     </th>
-                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-black uppercase tracking-wider">
                                         Updated Date
                                     </th>
-                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-small text-black uppercase tracking-wider">
                                         Action
                                     </th>
                                 </tr>
@@ -174,28 +174,28 @@
                                 @foreach ($tickets as $ticket)
                                     @if(request()->has('view_deleted'))
                                         <tr>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-center text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-center text-black">
                                                 {{ $ticket->id }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ $ticket->subject }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ (DB::table('users')->where('id', ($ticket->user_id))->value('name')) }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ (DB::table('categories')->where('id', ($ticket->category_id))->value('title')) }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ (DB::table('statuses')->where('id', ($ticket->status_id))->value('title')) }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ (DB::table('priorities')->where('id', ($ticket->priority_id))->value('title')) }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ (DB::table('users')->where('id', ($ticket->admin_id))->value('name')) }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ $ticket->updated_at->diffForHumans() }}
                                             </td>
                                             <td class="px-2 py-4 whitespace-nowrap text-sm font-small">
@@ -205,38 +205,40 @@
                                     @else
                                         <tr onclick="document.getElementById('{{ $ticket->id }}').click();" style="cursor: pointer" class="hover:bg-green-200">
                                             <a href="{{ route('tickets.show', $ticket->id) }}" id='{{ $ticket->id }}'>
-                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-center text-gray-900">
+                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-center text-black">
                                                     {{ $ticket->id }}
                                                 </td>
-                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                     {{ $ticket->subject }}
                                                 </td>
-                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                     {{ (DB::table('users')->where('id', ($ticket->user_id))->value('name')) }}
                                                 </td>
-                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                     {{ (DB::table('categories')->where('id', ($ticket->category_id))->value('title')) }}
                                                 </td>
-                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                     {{ (DB::table('statuses')->where('id', ($ticket->status_id))->value('title')) }}
                                                 </td>
-                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                     {{ (DB::table('priorities')->where('id', ($ticket->priority_id))->value('title')) }}
                                                 </td>
-                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                     {{ (DB::table('users')->where('id', ($ticket->admin_id))->value('name')) }}
                                                 </td>
-                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                     {{ $ticket->updated_at->diffForHumans() }}
                                                 </td>
                                             </a>
                                             <td class="px-2 py-4 whitespace-nowrap text-sm font-small">
                                                 <a href="{{ route('tickets.edit', $ticket->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
-                                                <form class="inline-block" action="{{ route('tickets.destroy', $ticket->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="submit" class="text-red-600 hover:text-red-900 mb-2 mr-2" value="Archive">
-                                                </form>
+                                                @if($ticket->status_id === 3)
+                                                    <form class="inline-block" action="{{ route('tickets.destroy', $ticket->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="submit" class="text-red-600 hover:text-red-900 mb-2 mr-2" value="Archive">
+                                                    </form>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endif

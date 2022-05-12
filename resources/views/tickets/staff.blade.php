@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="block mb-5">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-black leading-tight">
                 {{ __('Staff Tickets List') }}
             </h2>
         </div>
@@ -122,59 +122,59 @@
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200 w-full">
+                        <div class="shadow overflow-hidden border-b border-black-200 sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-black-200 w-full">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-2 bg-black-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             Ticket ID
                                         </th>
-                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-2 bg-black-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             Subject
                                         </th>
-                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-2 bg-black-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             Submit By
                                         </th>
-                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-2 bg-black-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             Category
                                         </th>
-                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-2 bg-black-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             Status
                                         </th>
-                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-2 bg-black-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             Priority
                                         </th>
-                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-2 bg-black-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             Updated Date
                                         </th>
-                                        <th scope="col" class="px-2 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" class="px-2 py-2 bg-black-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             Action
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
+                                <tbody class="bg-white divide-y divide-black-200">
                                 @foreach ($tickets as $ticket)
                                     <tr onclick="document.getElementById('{{ $ticket->id }}').click();" style="cursor: pointer" class="hover:bg-green-200">
                                         <a href="{{ route('tickets.show', $ticket->id) }}" id='{{ $ticket->id }}'>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-center text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-center text-black">
                                                 {{ $ticket->id }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ $ticket->subject }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ (DB::table('users')->where('id', ($ticket->user_id))->value('name')) }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ (DB::table('categories')->where('id', ($ticket->category_id))->value('title')) }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ (DB::table('statuses')->where('id', ($ticket->status_id))->value('title')) }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ (DB::table('priorities')->where('id', ($ticket->priority_id))->value('title')) }}
                                             </td>
-                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <td class="px-2 py-4 whitespace-nowrap text-sm text-black">
                                                 {{ $ticket->updated_at }}
                                             </td>
 

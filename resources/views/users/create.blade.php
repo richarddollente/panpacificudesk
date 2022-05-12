@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-black leading-tight">
             Create User
         </h2>
     </x-slot>
@@ -12,7 +12,7 @@
                     @csrf
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="name" class="block font-medium text-sm text-gray-700">Name</label>
+                            <label for="name" class="block font-medium text-sm text-black">Name</label>
                             <input type="text" name="name" id="name" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('name', '') }}" />
                             @error('name')
@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="email" class="block font-medium text-sm text-gray-700">Email</label>
+                            <label for="email" class="block font-medium text-sm text-black">Email</label>
                             <input type="email" name="email" id="email" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('email', '') }}" />
                             @error('email')
@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="password" class="block font-medium text-sm text-gray-700">Password</label>
+                            <label for="password" class="block font-medium text-sm text-black">Password</label>
                             <input type="password" name="password" id="password" class="form-input rounded-md shadow-sm mt-1 block w-full" />
                             @error('password')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="class" class="block font-medium text-sm text-gray-700">Class</label>
+                            <label for="class" class="block font-medium text-sm text-black">Class</label>
                             <select name="class_id" id="category_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full">
                                 @foreach($classes as $id => $classes)
                                     <option value="{{ $id }}"{{ in_array($id, old('classes', [])) ? ' selected' : '' }}>{{ $classes }}</option>
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="roles" class="block font-medium text-sm text-gray-700">Roles</label>
+                            <label for="roles" class="block font-medium text-sm text-black">Roles</label>
                             <select name="roles[]" id="roles" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">
                                 @foreach($roles as $id => $role)
                                     <option value="{{ $id }}"{{ in_array($id, old('roles', [])) ? ' selected' : '' }}>{{ $role }}</option>

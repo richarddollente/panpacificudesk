@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+            <x-application-logo class="block h-15 w-auto fill-current text-black" />
         </x-slot>
 
         <h1 style="display:flex; justify-content:center;">Panpacific University Helpdesk</h1>
@@ -31,7 +31,7 @@
             <div class="block mt-4">
                 <label for="remember_me" class="flex items-center">
                     <input id="remember_me" type="checkbox" class="form-checkbox" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    <span class="ml-2 text-sm text-black">{{ __('Remember me') }}</span>
                 </label>
             </div>
 
@@ -43,14 +43,14 @@
 
             <div class="flex items-center justify-left mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    <a class="underline text-sm text-black hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
             </div>
             <div class="flex items-center justify-left mt-4">
                 @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="underline text-sm text-gray-600 hover:text-gray-900">Register</a>
+                    <a href="{{ route('register') }}" class="underline text-sm text-black hover:text-gray-900">Register</a>
                 @endif
             </div>
         </form>

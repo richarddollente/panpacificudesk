@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-black leading-tight">
             Edit Ticket
         </h2>
     </x-slot>
@@ -13,7 +13,7 @@
                     @method('put')
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="subject" class="block font-medium text-sm text-gray-700">Subject</label>
+                            <label for="subject" class="block font-medium text-sm text-black">Subject</label>
                             <input type="text" name="subject" id="subject" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('subject', $ticket->subject) }}"/>
                             @error('subject')
@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="description" class="block font-medium text-sm text-gray-700">Description</label>
+                            <label for="description" class="block font-medium text-sm text-black">Description</label>
                             <textarea type="text" name="description" id="description" class="form-input rounded-md shadow-sm mt-1 block w-full"/>{{ old('description', $ticket->description) }}</textarea>
                             @error('description')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="category" class="block font-medium text-sm text-gray-700">Category</label>
+                            <label for="category" class="block font-medium text-sm text-black">Category</label>
                             <select name="category_id" id="category_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full">
                                 @foreach($categories as $id => $categories)
                                     <option value="{{ $id }}"{{ old('category_id', $ticket->category_id) === $id ? ' selected' : '' }}>
@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="priority" class="block font-medium text-sm text-gray-700">Priority</label>
+                            <label for="priority" class="block font-medium text-sm text-black">Priority</label>
                             <select name="priority_id" id="priority_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full">
                                 @foreach($priorities as $id => $priorities)
                                     <option value="{{ $id }}"{{ old('priority_id', $ticket->priority_id) === $id ? ' selected' : '' }}>
@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="status" class="block font-medium text-sm text-gray-700">Status</label>
+                            <label for="status" class="block font-medium text-sm text-black">Status</label>
                             <select name="status_id" id="status_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full">
                                 @foreach($statuses as $id => $statuses)
                                     <option value="{{ $id }}"{{ old('status_id', $ticket->status_id) === $id ? ' selected' : '' }}>
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="status" class="block font-medium text-sm text-gray-700">Admin Assigned</label>
+                            <label for="status" class="block font-medium text-sm text-black">Admin Assigned</label>
                             <select name="admin_id" id="admin_id" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full">
                                 @foreach($admins as $id => $admins)
                                     <option value="{{ $id }}"{{ old('admin_id', $ticket->admin_id) === $id ? ' selected' : '' }}>
